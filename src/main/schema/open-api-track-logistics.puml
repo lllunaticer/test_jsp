@@ -1,0 +1,75 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+actor Outsider #red
+boundary AuthenticationCenter
+participant OpenApi
+participant TrackRpcService
+database track
+participant DeliveryRpcService
+database delivery
+
+Outsider --> AuthenticationCenter: 带token的轨迹更新请求
+note left
+    安骏，极兔等
+end note
+
+activate AuthenticationCenter
+AuthenticationCenter -> AuthenticationCenter: AppKey 校验\n签名校验
+alt #pink 校验失败
+    AuthenticationCenter --[#red]> Outsider: 失败，错误码1
+end
+
+alt #pink RateLimit?
+    AuthenticationCenter --[#red]> Outsider: 失败，错误码2
+end
+AuthenticationCenter --[#red]> OpenApi: 转发轨迹更新请求
+deactivate
+
+activate OpenApi
+
+OpenApi -> OpenApi: 数据有效性校验
+activate OpenApi
+OpenApi -> DeliveryRpcService: 查询运单号对应运单详情
+OpenApi -> OpenApi: 运单对应的服务商与appKey对应的服务商id是否匹配?\n其他数据格式校验
+alt #pink 不匹配
+    OpenApi-> Outsider: 失败，错误码3
+end
+deactivate
+OpenApi->TrackRpcService: 写入物流轨迹数据
+
+activate TrackRpcService
+TrackRpcService->track: 获取最近一条物流信息，\n1.本条更新时间不能小于最近一条记录更新时间\n2.根据状态机判断是否为有效写入
+note left
+    1. 调用方保证按时间顺序推数据
+    2. 新来的记录的时间小于最近一条记录更新时间抛弃?
+end note
+alt#gold #pink 无效状态
+    TrackRpcService -> OpenApi: Fail, 错误Status
+    OpenApi --[#red]> Outsider: 失败，错误码4
+else #lightblue
+    TrackRpcService -> track: 写入物流轨迹数据
+    return 写入成功
+end
+deactivate TrackRpcService
+
+alt #gold 关键物流节点
+    OpenApi -> DeliveryRpcService: 修改物流状态
+    activate DeliveryRpcService
+    DeliveryRpcService -> DeliveryRpcService: 判断是否为有效状态变更(如何判断? 时间不回退!)
+    DeliveryRpcService -> delivery: 写入物流状态
+    alt #lightblue 写入成功
+        DeliveryRpcService -> OpenApi: 写入成功
+        OpenApi -[#blue]> Outsider: 物流信息更新成功
+    else #pink 写入失败
+        DeliveryRpcService -> OpenApi: 写入失败
+        OpenApi -[#blue]> Outsider: 失败，错误码5
+    end
+else #lightblue 非关键物流节点不需要更新物流状态
+    OpenApi -[#blue]> Outsider: 物流信息更新成功
+end
+
+deactivate OpenApi
+
+@enduml

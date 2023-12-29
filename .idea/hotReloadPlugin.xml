@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="HotReloadPluginConfiguration">
+    <option name="hostNameKeyword" value="kt-snack" />
+    <option name="keywords">
+      <list>
+        <option value="8600" />
+      </list>
+    </option>
+    <option name="selectedHostName" value="kt-snack-api22.gcpsgpc.sgp.kwaidc.com:18806" />
+    <option name="selectedProcess">
+      <JvmProcess>
+        <option name="detailVmArgs" value="-Djava.util.logging.config.file=/data/web_server/apache/tomcat_8600/conf/logging.properties -Dnop -XX:+UnlockExperimentalVMOptions -XX:+UseStringDeduplication -XX:MaxJavaStackTraceDepth=1073741823 -XX:+AggressiveOpts -XX:-OmitStackTraceInFastThrow -XX:+PrintGCApplicationStoppedTime -XX:+PrintGCDetails -XX:+PrintGCDateStamps -Dfile.encoding=UTF-8 -Djava.library.path=/usr/local/lib -DLOG_PATH=/data/logs/8600/ -DSERVER_PORT=8600 -DHikariCP=true -Djuli-logback.configurationFile=file:/data/web_server/apache/tomcat_8600/conf/logback.xml -XX:+UseG1GC -XX:ParallelGCThreads=24 -XX:ConcGCThreads=12 -XX:MaxGCPauseMillis=200 -XX:InitiatingHeapOccupancyPercent=50 -Xmx4G -Xms4G -XX:MetaspaceSize=100M -Xss512K -Djava.endorsed.dirs= -Dcatalina.base=/data/web_server/apache/tomcat_8600 -Dcatalina.home=/data/web_server/apache/tomcat_8600 -Djava.io.tmpdir=/tmp" />
+        <option name="displayName" value="org.apache.catalina.startup.Bootstrap start" />
+        <option name="pid" value="15624" />
+      </JvmProcess>
+    </option>
+    <option name="server" value="hotreload.test.gifshow.com" />
+  </component>
+</project>

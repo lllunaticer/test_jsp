@@ -1,0 +1,25 @@
+@startuml
+interface IScoutTask{
+ +matchCondition(ScoutTaskContext context)
+ +finish(ScoutTaskContext context)
+ +getTask()
+ +getTaskConfig(ExploreLocale exploreLocale)
+}
+class ScoutTaskProcessor{
++void process(ScoutTaskContext context)
+}
+abstract class OtherTask implements IScoutTask
+class InBoundTask implements IScoutTask
+class AuditRevisionTask implements IScoutTask
+
+class ProfessionalTask extends OtherTask
+class PopularTask extends OtherTask
+class HardWorkingTask extends OtherTask
+class GrowingTask extends OtherTask
+class ExplosiveTask extends OtherTask
+class ActiveTask extends OtherTask
+class AchievementTask extends OtherTask
+
+ScoutTaskProcessor *-- "many" IScoutTask: 包含
+
+@enduml

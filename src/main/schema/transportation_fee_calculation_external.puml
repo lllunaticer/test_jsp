@@ -1,0 +1,30 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+actor 买家
+participant 订单服务
+participant 买家服务
+participant 商品服务
+participant 商家服务
+participant 地址管理服务
+participant 运费计算服务 #pink
+
+autoactivate on
+买家 -> 订单服务:对商品A下单
+订单服务 -> 买家服务: 获取买家详情
+return 买家收货地址id
+订单服务 -> 商品服务: 获取商品A的详情
+return 商家id,商品重量,物流服务商
+
+订单服务 -> 商家服务: 获取商家详情with 商家id
+return 商家详情(商家发货地址id)
+
+订单服务 -> 地址管理服务: 获取邮编 with id
+return 买家邮编，卖家邮编
+
+订单服务 -> 运费计算服务: 获取运费 with 买家邮编,卖家邮编,物流服务商,商品重量
+return 运费
+return 运费
+
+@enduml

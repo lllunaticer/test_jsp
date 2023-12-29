@@ -1,0 +1,20 @@
+
+v	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ÿÙÂ‹8Ààõ²³1
+G	java:S106 "+Replace this use of System.out by a logger.(áŞĞ8²áõ²³1
+L	java:S106$"+Replace this use of System.out by a logger.(ãõ¨üüÿÿÿÿ8³áõ²³1
+G	java:S106'"+Replace this use of System.out by a logger.(ÆÀûı8µáõ²³1
+L	java:S106-"+Replace this use of System.out by a logger.(ßÕÕ£üÿÿÿÿ8¸áõ²³1
+G	java:S1062"+Replace this use of System.out by a logger.(öçÕ³8¹áõ²³1
+G	java:S1063"+Replace this use of System.out by a logger.(Ì˜¤8¹áõ²³1
+G	java:S1067"+Replace this use of System.out by a logger.(Ê…£ú8ºáõ²³1
+G	java:S106:"+Replace this use of System.out by a logger.(é¢‚’8»áõ²³1
+G	java:S106<"+Replace this use of System.out by a logger.(ÆÀûı8Êáõ²³1
+L	java:S106A"+Replace this use of System.out by a logger.(ÙĞ‹ùÿÿÿÿ8Ìáõ²³1
+L	java:S106B"+Replace this use of System.out by a logger.(—Ï¼şûÿÿÿÿ8Ìáõ²³1
+G	java:S106D"+Replace this use of System.out by a logger.(«É‡–8Íáõ²³1
+L	java:S106E"+Replace this use of System.out by a logger.(é»­¬ıÿÿÿÿ8Íáõ²³1
+G	java:S106H"+Replace this use of System.out by a logger.(ÆÀûı8×áõ²³1
+J
+java:S1068"-Remove this unused "FORMATTER" private field.(Å¸á†8Ùáõ²³1
+N
+java:S1068"1Remove this unused "SYSTEM_OFFSET" private field.(Ê‹¤§8Ûáõ²³1

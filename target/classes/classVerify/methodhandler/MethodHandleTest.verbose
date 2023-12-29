@@ -1,0 +1,165 @@
+Classfile /Users/longxingjian_1/work/test_dir/test_jsp/target/classes/classVerify/methodhandler/MethodHandleTest.class
+  Last modified 2023年12月19日; size 1743 bytes
+  SHA-256 checksum a2ffd1e925761f87294b028627fb2ee5089b0c38eeb280c1466ea504105daecf
+  Compiled from "MethodHandleTest.java"
+public class classVerify.methodhandler.MethodHandleTest
+  minor version: 0
+  major version: 52
+  flags: (0x0021) ACC_PUBLIC, ACC_SUPER
+  this_class: #19                         // classVerify/methodhandler/MethodHandleTest
+  super_class: #20                        // java/lang/Object
+  interfaces: 0, fields: 0, methods: 3, attributes: 2
+Constant pool:
+   #1 = Methodref          #20.#48        // java/lang/Object."<init>":()V
+   #2 = Methodref          #49.#50        // java/lang/System.currentTimeMillis:()J
+   #3 = Long               2l
+   #5 = Fieldref           #49.#51        // java/lang/System.out:Ljava/io/PrintStream;
+   #6 = Class              #52            // classVerify/methodhandler/MethodHandleTest$ClassA
+   #7 = Methodref          #6.#48         // classVerify/methodhandler/MethodHandleTest$ClassA."<init>":()V
+   #8 = Methodref          #19.#53        // classVerify/methodhandler/MethodHandleTest.getPrintlnMH:(Ljava/lang/Object;)Ljava/lang/invoke/MethodHandle;
+   #9 = String             #54            // icyfenix
+  #10 = Methodref          #55.#56        // java/lang/invoke/MethodHandle.invokeExact:(Ljava/lang/String;)V
+  #11 = Fieldref           #57.#58        // java/lang/Void.TYPE:Ljava/lang/Class;
+  #12 = Class              #59            // java/lang/String
+  #13 = Methodref          #60.#61        // java/lang/invoke/MethodType.methodType:(Ljava/lang/Class;Ljava/lang/Class;)Ljava/lang/invoke/MethodType;
+  #14 = Methodref          #62.#63        // java/lang/invoke/MethodHandles.lookup:()Ljava/lang/invoke/MethodHandles$Lookup;
+  #15 = Methodref          #20.#64        // java/lang/Object.getClass:()Ljava/lang/Class;
+  #16 = String             #65            // println
+  #17 = Methodref          #66.#67        // java/lang/invoke/MethodHandles$Lookup.findVirtual:(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/MethodHandle;
+  #18 = Methodref          #55.#68        // java/lang/invoke/MethodHandle.bindTo:(Ljava/lang/Object;)Ljava/lang/invoke/MethodHandle;
+  #19 = Class              #69            // classVerify/methodhandler/MethodHandleTest
+  #20 = Class              #70            // java/lang/Object
+  #21 = Utf8               ClassA
+  #22 = Utf8               InnerClasses
+  #23 = Utf8               <init>
+  #24 = Utf8               ()V
+  #25 = Utf8               Code
+  #26 = Utf8               LineNumberTable
+  #27 = Utf8               LocalVariableTable
+  #28 = Utf8               this
+  #29 = Utf8               LclassVerify/methodhandler/MethodHandleTest;
+  #30 = Utf8               main
+  #31 = Utf8               ([Ljava/lang/String;)V
+  #32 = Utf8               args
+  #33 = Utf8               [Ljava/lang/String;
+  #34 = Utf8               obj
+  #35 = Utf8               Ljava/lang/Object;
+  #36 = Utf8               StackMapTable
+  #37 = Class              #70            // java/lang/Object
+  #38 = Utf8               Exceptions
+  #39 = Class              #71            // java/lang/Throwable
+  #40 = Utf8               MethodParameters
+  #41 = Utf8               getPrintlnMH
+  #42 = Utf8               (Ljava/lang/Object;)Ljava/lang/invoke/MethodHandle;
+  #43 = Utf8               receiver
+  #44 = Utf8               mt
+  #45 = Utf8               Ljava/lang/invoke/MethodType;
+  #46 = Utf8               SourceFile
+  #47 = Utf8               MethodHandleTest.java
+  #48 = NameAndType        #23:#24        // "<init>":()V
+  #49 = Class              #72            // java/lang/System
+  #50 = NameAndType        #73:#74        // currentTimeMillis:()J
+  #51 = NameAndType        #75:#76        // out:Ljava/io/PrintStream;
+  #52 = Utf8               classVerify/methodhandler/MethodHandleTest$ClassA
+  #53 = NameAndType        #41:#42        // getPrintlnMH:(Ljava/lang/Object;)Ljava/lang/invoke/MethodHandle;
+  #54 = Utf8               icyfenix
+  #55 = Class              #77            // java/lang/invoke/MethodHandle
+  #56 = NameAndType        #78:#79        // invokeExact:(Ljava/lang/String;)V
+  #57 = Class              #80            // java/lang/Void
+  #58 = NameAndType        #81:#82        // TYPE:Ljava/lang/Class;
+  #59 = Utf8               java/lang/String
+  #60 = Class              #83            // java/lang/invoke/MethodType
+  #61 = NameAndType        #84:#85        // methodType:(Ljava/lang/Class;Ljava/lang/Class;)Ljava/lang/invoke/MethodType;
+  #62 = Class              #86            // java/lang/invoke/MethodHandles
+  #63 = NameAndType        #87:#89        // lookup:()Ljava/lang/invoke/MethodHandles$Lookup;
+  #64 = NameAndType        #90:#91        // getClass:()Ljava/lang/Class;
+  #65 = Utf8               println
+  #66 = Class              #92            // java/lang/invoke/MethodHandles$Lookup
+  #67 = NameAndType        #93:#94        // findVirtual:(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/MethodHandle;
+  #68 = NameAndType        #95:#42        // bindTo:(Ljava/lang/Object;)Ljava/lang/invoke/MethodHandle;
+  #69 = Utf8               classVerify/methodhandler/MethodHandleTest
+  #70 = Utf8               java/lang/Object
+  #71 = Utf8               java/lang/Throwable
+  #72 = Utf8               java/lang/System
+  #73 = Utf8               currentTimeMillis
+  #74 = Utf8               ()J
+  #75 = Utf8               out
+  #76 = Utf8               Ljava/io/PrintStream;
+  #77 = Utf8               java/lang/invoke/MethodHandle
+  #78 = Utf8               invokeExact
+  #79 = Utf8               (Ljava/lang/String;)V
+  #80 = Utf8               java/lang/Void
+  #81 = Utf8               TYPE
+  #82 = Utf8               Ljava/lang/Class;
+  #83 = Utf8               java/lang/invoke/MethodType
+  #84 = Utf8               methodType
+  #85 = Utf8               (Ljava/lang/Class;Ljava/lang/Class;)Ljava/lang/invoke/MethodType;
+  #86 = Utf8               java/lang/invoke/MethodHandles
+  #87 = Utf8               lookup
+  #88 = Utf8               Lookup
+  #89 = Utf8               ()Ljava/lang/invoke/MethodHandles$Lookup;
+  #90 = Utf8               getClass
+  #91 = Utf8               ()Ljava/lang/Class;
+  #92 = Utf8               java/lang/invoke/MethodHandles$Lookup
+  #93 = Utf8               findVirtual
+  #94 = Utf8               (Ljava/lang/Class;Ljava/lang/String;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/MethodHandle;
+  #95 = Utf8               bindTo
+{
+  public classVerify.methodhandler.MethodHandleTest();
+    descriptor: ()V
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: return
+      LineNumberTable:
+        line 14: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0  this   LclassVerify/methodhandler/MethodHandleTest;
+
+  public static void main(java.lang.String[]) throws java.lang.Throwable;
+    descriptor: ([Ljava/lang/String;)V
+    flags: (0x0009) ACC_PUBLIC, ACC_STATIC
+    Code:
+      stack=4, locals=2, args_size=1
+         0: invokestatic  #2                  // Method java/lang/System.currentTimeMillis:()J
+         3: ldc2_w        #3                  // long 2l
+         6: lrem
+         7: lconst_0
+         8: lcmp
+         9: ifne          18
+        12: getstatic     #5                  // Field java/lang/System.out:Ljava/io/PrintStream;
+        15: goto          25
+        18: new           #6                  // class classVerify/methodhandler/MethodHandleTest$ClassA
+        21: dup
+        22: invokespecial #7                  // Method classVerify/methodhandler/MethodHandleTest$ClassA."<init>":()V
+        25: astore_1
+        26: aload_1
+        27: invokestatic  #8                  // Method getPrintlnMH:(Ljava/lang/Object;)Ljava/lang/invoke/MethodHandle;
+        30: ldc           #9                  // String icyfenix
+        32: invokevirtual #10                 // Method java/lang/invoke/MethodHandle.invokeExact:(Ljava/lang/String;)V
+        35: return
+      LineNumberTable:
+        line 22: 0
+        line 26: 26
+        line 27: 35
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      36     0  args   [Ljava/lang/String;
+           26      10     1   obj   Ljava/lang/Object;
+      StackMapTable: number_of_entries = 2
+        frame_type = 18 /* same */
+        frame_type = 70 /* same_locals_1_stack_item */
+          stack = [ class java/lang/Object ]
+    Exceptions:
+      throws java.lang.Throwable
+    MethodParameters:
+      Name                           Flags
+      args
+}
+SourceFile: "MethodHandleTest.java"
+InnerClasses:
+  static #21= #6 of #19;                  // ClassA=class classVerify/methodhandler/MethodHandleTest$ClassA of class classVerify/methodhandler/MethodHandleTest
+  public static final #88= #66 of #62;    // Lookup=class java/lang/invoke/MethodHandles$Lookup of class java/lang/invoke/MethodHandles

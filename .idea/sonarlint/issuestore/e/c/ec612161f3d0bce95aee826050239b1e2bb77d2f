@@ -1,0 +1,16 @@
+
+v	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ÓÌõ8ò²ø²³1
+^
+java:S1075"ARefactor your code to get this URI from a customizable parameter.(Âóª8Ø³ø²³1
+[
+java:S1854"9Remove this useless assignment to local variable "iStr2".(ÿæ’òûÿÿÿÿ8İ³ø²³1
+X	java:S125"<This block of commented-out lines of code should be removed.(›ş‚œ8è³ø²³1
+L
+java:S1481"*Remove this unused "iStr2" local variable.(ÿæ’òûÿÿÿÿ8î³ø²³1
+L	java:S106"+Replace this use of System.out by a logger.(›©ìúÿÿÿÿ8ï³ø²³1
+L	java:S106%"+Replace this use of System.out by a logger.(¸šñÙüÿÿÿÿ8ö³ø²³1
+L	java:S106+"+Replace this use of System.out by a logger.(ÒÃÿ‘üÿÿÿÿ8÷³ø²³1
+G	java:S106O"+Replace this use of System.out by a logger.(‚¨Ö§8“´ø²³1
+L	java:S106R"+Replace this use of System.out by a logger.(öãÚØÿÿÿÿÿ8•´ø²³1
+L	java:S106c"+Replace this use of System.out by a logger.(æàÃÑşÿÿÿÿ8—´ø²³1
+G	java:S106e"+Replace this use of System.out by a logger.(Ñ¡ˆ8Üùø²³1

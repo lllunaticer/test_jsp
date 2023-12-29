@@ -1,0 +1,50 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+'运费规则及计算数据更新
+actor operator
+participant metaDataService
+participant transportationFeeService
+
+database redis #pink
+database mysql #lightgreen
+autonumber
+autoactivate on
+==初始化服务商运费元数据==
+operator -> metaDataService: 使用归一化的excel\n<font color=red>初始化</font>服务商A的运费元数据
+metaDataService -> metaDataService: 1. 数据格式校验\n2.格式化数据归一
+alt 数据格式无问题
+    metaDataService -> mysql: 写入db
+    return
+    metaDataService -> redis: 写入redis
+    return
+    return 新增成功
+    return 新增成功
+else 数据格式有问题
+    return 新增失败
+end
+
+autonumber
+==更新服务商运费元数据==
+operator -> metaDataService: 使用归一化的excel\n<font color=red>更新</font>服务商A的元数据
+metaDataService -> metaDataService: 1. 数据格式校验\n2.格式化数据归一
+alt 数据格式无问题
+    metaDataService -> transportationFeeService: 查询当前数据项是否存在
+    return 查询结果
+    alt 数据项不存在
+        metaDataService -> mysql: 写入db
+        return
+        metaDataService -> redis: 写入redis
+        return
+    else 数据项已存在
+        metaDataService -> mysql: 更改数据项
+        return
+        metaDataService -> redis: 删除数据项\n<font color=gold>没有并发更新的场景下其实复写也可以</font>
+        return
+    end
+    return 更新成功
+    return 更新成功
+else 数据格式有问题
+    return 更新失败
+end
+
+@enduml

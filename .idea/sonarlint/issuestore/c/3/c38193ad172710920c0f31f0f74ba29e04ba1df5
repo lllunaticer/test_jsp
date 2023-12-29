@@ -1,0 +1,12 @@
+
+f
+java:S1192$"IDefine a constant instead of duplicating this literal "Computer" 5 times.(¨Èôí8‘ƒö²³1
+{	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ˆõ¬£üÿÿÿÿ8“ƒö²³1
+L	java:S106K"+Replace this use of System.out by a logger.(ñ»Ùãüÿÿÿÿ8İ„ö²³1
+L	java:S106_"+Replace this use of System.out by a logger.(ø²‡Çÿÿÿÿÿ8á„ö²³1
+L	java:S106o"+Replace this use of System.out by a logger.(âôÙ¶ıÿÿÿÿ8ä„ö²³1
+M	java:S106‡"+Replace this use of System.out by a logger.(÷Ã»¹úÿÿÿÿ8ì„ö²³1
+O
+java:S1128"-Remove this unused import 'java.util.Arrays'.(î–˜Éüÿÿÿÿ8úßäÈ1
+H
+java:S5960)"+Remove this assertion from production code.(µƒø«8€…ö²³1

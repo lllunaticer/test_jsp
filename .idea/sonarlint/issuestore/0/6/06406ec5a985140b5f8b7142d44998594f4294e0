@@ -1,0 +1,6 @@
+
+v	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ß¾Ÿ8ÛóÇ»Å1
+g
+java:S2674"JCheck the return value of the "read" call to see how many bytes were read.(Êûÿ8èóÇ»Å1
+G	java:S106 "+Replace this use of System.out by a logger.(˜½Å8éóÇ»Å1
+F	java:S106!"+Replace this use of System.out by a logger.(öÚõh8éóÇ»Å1

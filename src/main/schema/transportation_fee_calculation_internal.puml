@@ -1,0 +1,39 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+'查询提供地址查询运费价格
+participant orderService
+participant transportationFeeService #orange
+
+collections kconf
+
+database localCache #gold
+database redis #pink
+database mysql #lightgreen
+
+autonumber
+autoactivate on
+orderService -> transportationFeeService: 查询邮费 \nwith(邮编1, 邮编2, 供应商id, 实际重量Z)
+transportationFeeService -> kconf: 查询重量阶梯右边界 \nwith(供应商id, 实际重量Z)
+return 重量右边界Y
+alt 重量右边界Y > 实际重量Z
+    transportationFeeService->redis: 查询有边界邮费 \nwith(邮编1, 邮编2, 供应商id, 重量右边界Y)
+    alt cache miss
+        redis -> mysql: 查询邮费
+        return 缓存回流
+    else cache miss
+        return 运费
+    end
+else 重量右边界Y < 实际重量Z
+    transportationFeeService-> redis: 1.查询重量右边界Y邮费 \n2.查询超重每kg邮费B\nwith(邮编1, 邮编2, 供应商id, 重量右边界)
+    alt cache miss
+        redis -> mysql: 查询重量右边界Y邮费, 超重每kg邮费B
+        return 缓存回流
+    else cache miss
+        return 最高右边界邮费 A \n 超重后每kg额外邮费B
+    end
+    transportationFeeService -> transportationFeeService:运费 = A + (向上取整(Z-Y)) * B
+end
+return 运费
+return 运费
+
+@enduml

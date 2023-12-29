@@ -1,0 +1,20 @@
+
+7
+java:S1220""Move this file to a named package.8©íõ²³1
+v	java:S115
+"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(Èùæá8×íõ²³1
+£
+java:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(Ø«š‰ùÿÿÿÿ8Øíõ²³1
+R
+java:S1854"5Remove this useless assignment to local variable "p".(ÀÎƒÿ8èíõ²³1
+•
+java:S1130"xRemove the declaration of thrown exception 'java.lang.NoSuchMethodException', as it cannot be thrown from method's body.(Ùİ™¸8êíõ²³1
+C
+java:S1481"&Remove this unused "p" local variable.(ÀÎƒÿ8òíõ²³1
+G	java:S106"+Replace this use of System.out by a logger.(¡õ¤Ÿ8öíõ²³1
+G	java:S106"+Replace this use of System.out by a logger.(úÆ«è8ƒîõ²³1
+G	java:S106 "+Replace this use of System.out by a logger.(¥ÙÑ÷8„îõ²³1
+L	java:S106!"+Replace this use of System.out by a logger.(½¶¿¨ıÿÿÿÿ8…îõ²³1
+L	java:S106""+Replace this use of System.out by a logger.(­¥Øµşÿÿÿÿ8†îõ²³1
+G	java:S106#"+Replace this use of System.out by a logger.(ö¡¹ê8‡îõ²³1
+F	java:S106*"+Replace this use of System.out by a logger.(¡¶‚_8‰îõ²³1
