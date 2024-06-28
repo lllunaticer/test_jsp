@@ -1,14 +1,22 @@
 package SetTest;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Sets;
 
 /**
  * @author Xingjian LONG
@@ -203,5 +211,35 @@ public class testSet {
     public void testName() {
         LOGGER.info("normal test");
         throw new IllegalArgumentException();
+    }
+
+    @Test
+    public void testSet2() {
+        long start = System.currentTimeMillis();
+        List<String> listValue = new ArrayList<>();
+        Set<String> hashSetValue = new HashSet<>();
+        for (int i = 0; i < 12000; i++) {
+            String value = String.valueOf(start);
+            listValue.add(value);
+            hashSetValue.add(value);
+            start++;
+        }
+        System.out.println("list size: " + listValue.size() + ", hashSet size: " + hashSetValue.size());
+        String targetValue = String.valueOf(start - 1);
+
+        long startTime = System.currentTimeMillis();
+        if (listValue.contains(targetValue)) {
+            System.out.println("yes");
+        }
+        long completeTime = System.currentTimeMillis();
+        System.out.println("ArrayList Duration: " + (completeTime - startTime) + "ms");
+
+
+        startTime = System.currentTimeMillis();
+        if (hashSetValue.contains(targetValue)) {
+            System.out.println("yes");
+        }
+        completeTime = System.currentTimeMillis();
+        System.out.println("HashSet Duration: " + (completeTime - startTime) + "ms");
     }
 }

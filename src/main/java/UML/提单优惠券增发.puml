@@ -1,0 +1,25 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+autonumber
+participant 交易 as trade
+participant 报价 as price  #gold
+participant 券 as coupon
+participant 风控 as antispam  #pink
+participant 推荐 as reco #lightblue
+
+==提单增发优惠券==
+trade -> price: 用订单信息请求报价: \nuser_id \ncountry_code \ndevice_id \n预估运费 \nitem_id \nsku_id \nmedia_source \nsku价格/成本 \n订单总价 \n商家id
+activate price
+price -> coupon: 获取用户的可用券列表: \n使用秒杀/达人专享等\n活动后的订单信息
+activate coupon
+return 订单可用的优惠券列表 couponList
+price -> antispam: 券列表过风控: \n订单信息\n 券列表过风控
+activate antispam
+return 用户可用券列表 usableCouponList\n<font color=red>是否可增发运费券</font>
+alt 可增发运费券
+price -> reco: 获取增发的券信息(增发额，门槛): 订单信息 \n用户信息 \n已有最优券信息
+
+
+end
+
+@enduml

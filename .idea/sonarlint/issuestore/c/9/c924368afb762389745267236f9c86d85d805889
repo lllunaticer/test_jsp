@@ -1,0 +1,31 @@
+
+”	java:S101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(ÿΦΠÿÿÿÿÿ8ςεφ1J$c70e52c4-9531-4d79-b406-1f32b7dac90d
+	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(£¬υ8‹ςεφ1J$9ff9e71e-3bfb-4927-b8eb-0c13e13d0ee5
+”
+java:S1223"LRename this method to prevent any misunderstanding or make it a constructor.(μ•ωÿÿÿÿ8ςεφ1J$e8774f48-0bff-4328-af69-fdb2263be919
+ƒ
+java:S1854d";Remove this useless assignment to local variable "collect".(ςέΎΦωÿÿÿÿ8ςεφ1J$13488c84-ab1f-4414-a6d7-a00e08847941
+~
+java:S1854"6Remove this useless assignment to local variable "t1".(‡¬“…ÿÿÿÿÿ8ςεφ1J$78fe306f-8408-4da6-876c-f0d37eea312c
+o
+java:S1481"'Remove this unused "t1" local variable.(‡¬“…ÿÿÿÿÿ8‘ςεφ1J$dda067a5-08fa-4f73-b447-21363a8bd8be
+t
+java:S1481d",Remove this unused "collect" local variable.(ςέΎΦωÿÿÿÿ8‘ςεφ1J$20d459de-cfc7-4cd9-b123-442a7ca89b3e
+n	java:S106¥"+Replace this use of System.out by a logger.(β­Ψ8’ςεφ1J$9295f6b9-4ccf-42cb-88ae-23cd26e4cc02
+g
+java:S1659«"#Declare "right" on a separate line.(£ΚΗη8’ςεφ1J$0ea2101a-8317-4538-9da5-45349591cc00
+s	java:S106Έ"+Replace this use of System.out by a logger.(ƒΦώÿÿÿÿ8’ςεφ1J$cab8f765-0d83-418f-a24b-b19582c38f23
+n	java:S106Ώ"+Replace this use of System.out by a logger.(ΊΆΤΧ8“ςεφ1J$a5e3ece7-ce41-4dfe-8e44-45544d9b5831
+n	java:S106γ"+Replace this use of System.out by a logger.(ªν³Ϊ8”ςεφ1J$a08ffeb3-9c87-4d62-923e-37b17c951e9b
+s	java:S106θ"+Replace this use of System.out by a logger.(…ωΰύÿÿÿÿ8”ςεφ1J$821c3aed-8608-4cf0-a3a3-9a6e6948352c
+m	java:S106λ"+Replace this use of System.out by a logger.(ƒΔ®!8•ςεφ1J$84ca2ed9-7a9f-45eb-a763-00496ff1ab73
+s	java:S106π"+Replace this use of System.out by a logger.(…ωΰύÿÿÿÿ8•ςεφ1J$9e7a9477-5039-4d5c-b845-5777a3064cb1
+n	java:S106σ"+Replace this use of System.out by a logger.(ο•΅8³ƒ£εφ1J$75eaceee-3169-426f-be4f-adf23c46ebfc
+
+java:S1128"LRemove this unused import 'org.apache.commons.collections4.CollectionUtils'.(»χΣj8΄Ε΅εφ1J$e8f00d41-533f-4cd5-9f8b-81e2faee1d6e
+‰
+java:S1128"ARemove this unused import 'org.apache.commons.lang3.StringUtils'.(ΨΌΊϊÿÿÿÿ8΄Ε΅εφ1J$d3f323e8-21cd-486c-89ad-0a1b52c6f027
+ƒ
+java:S1128"@Remove this unused import 'com.google.common.collect.Iterables'.(Φ”Θω8µΕ΅εφ1J$cb27829b-3e3a-42db-a140-bb4b8135006e
+}
+java:S1128";Remove this unused import 'com.google.common.collect.Sets'.(®™Δ8µΕ΅εφ1J$4322fe81-b4d2-4172-bf86-285320b65eab

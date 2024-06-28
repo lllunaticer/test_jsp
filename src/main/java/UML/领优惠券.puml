@@ -1,0 +1,75 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+autonumber
+actor user
+participant 领券api as coupon_take_api
+participant 领券rpc as coupon_take_rpc
+database 券redis as coupon_redis
+database 券db as coupon_mysql
+participant 风控 as risk_control
+database 人群包 as people_package_redis
+
+user -> coupon_take_api: 我要领券\n user_id \n 公参 \n batch_id
+
+activate coupon_take_api
+    coupon_take_api -> coupon_take_rpc: 领券\n user_id \n 公参 \n batch_id
+    coupon_take_rpc -> coupon_redis: 获取user_id 领券全局锁
+    activate coupon_redis
+        coupon_redis -> coupon_take_rpc: 拿锁结果
+    deactivate coupon_redis
+    alt #red 拿锁失败
+        coupon_take_rpc -> coupon_take_api: 领券失败
+    end
+
+    activate coupon_take_rpc
+        coupon_take_rpc -> coupon_redis: 查询batch_id对应的券详情
+        activate coupon_redis
+            coupon_redis -> coupon_take_rpc: <font color=blue>券详情</font>
+        deactivate coupon_redis
+
+        coupon_take_rpc -> coupon_redis: 查询用户领券频控\n user_id
+        activate coupon_redis
+            coupon_redis -> coupon_take_rpc: 用户领券频控信息
+        deactivate coupon_redis
+        alt #red 命中领券频控
+            coupon_take_rpc -> coupon_take_api !!: 领券失败
+        end
+
+        coupon_take_rpc -> coupon_mysql: 查询用户当前batch_id下的券信息 \n user_id \n batch_id
+        activate coupon_mysql
+            coupon_mysql -> coupon_take_rpc: 优惠券信息
+        deactivate coupon_mysql
+        alt #red batch_id下存在已领未用的优惠券
+            coupon_take_rpc -> coupon_take_api: 领券失败，存在已领取的优惠券
+        end
+
+        coupon_take_rpc -> risk_control: 过风控\n user_id \n 公参 \n <font color=blue>券详情</font>
+        activate risk_control
+            risk_control -> coupon_take_rpc: 风控信息
+        deactivate risk_control
+        alt #red 被风控
+            coupon_take_rpc -> coupon_take_api !!:  领券失败
+        end
+
+        coupon_take_rpc -> people_package_redis: 查询用户人群包信息 \n user_id
+        activate people_package_redis
+            people_package_redis -> coupon_take_rpc: user_id的所属人群包信息
+        deactivate people_package_redis
+        alt #red 用户不在<font color=blue>券详情</font>配置的人群包中
+            coupon_take_rpc -> coupon_take_api !!: 领券失败
+        end
+
+        coupon_take_rpc -> coupon_mysql: 写入用户领券记录 \n user_id \n <font color=blue>券详情</font>
+        activate coupon_mysql
+            coupon_mysql -> coupon_take_rpc: 写入结果
+        deactivate coupon_mysql
+
+        alt #red 写入失败
+            coupon_take_rpc -> coupon_take_api !!: 领券失败
+        end
+        coupon_take_rpc -> coupon_take_api: 领券成功
+        coupon_take_rpc -> coupon_redis: 释放领券全局锁
+    deactivate coupon_take_rpc
+
+deactivate coupon_take_api
+@enduml

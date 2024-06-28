@@ -1,10 +1,12 @@
 package TestGuava;
 
+import java.io.Serializable;
+
 /**
  * @author Xingjian LONG
  * Created on 2021-08-07
  */
-public class People {
+public class People implements Serializable {
     private int age;
     private String name;
 
@@ -27,5 +29,13 @@ public class People {
                 "age=" + age +
                 ", name='" + name + '\'' +
                 '}';
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

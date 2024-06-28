@@ -1,0 +1,74 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+autonumber
+participant 订单支付成功msg as pay_success_msg
+participant coupon #gold
+database 用户券详情mysql as coupon_mysql #lightgreen
+database coupon_redis #pink
+participant OA
+participant notification #lightblue
+
+==优惠券核销==
+pay_success_msg -> coupon: order_id 支付成功\n 带有coupon_id\n customer_id
+activate coupon
+coupon --[#red]> coupon_redis : 用户维度核销优惠券分布式锁<font color=red>[是否有必要?]</font>
+activate coupon_redis
+coupon_redis-> coupon: 获取锁情况
+deactivate coupon_redis
+alt #pink 获锁失败
+    coupon->pay_success_msg: consume later
+end
+coupon->coupon_mysql: query coupon with coupon_id
+activate coupon_mysql
+    coupon_mysql->coupon: 用户优惠券详情
+deactivate coupon_mysql
+
+note left: 校验优惠券使用信息是否match
+alt #red 优惠券不存在
+    coupon -> pay_success_msg !!: 报警, consume fail
+end
+alt #red 优惠券不满足约束(限定商品？)
+    coupon -> pay_success_msg !!: 报警, consume fail
+end
+
+alt #lightblue 优惠券被当前订单所使用
+    coupon -> coupon: 跳过判断，继续执行(幂等执行)
+end
+
+alt #red 优惠券不是冻结状态
+   coupon->pay_success_msg !!: 报警, consume fail
+end
+
+alt #red 优惠券不是被order_id所冻结
+   coupon->pay_success_msg !!: 报警, consume fail
+end
+
+coupon->coupon_mysql: 将券状态改为已使用\n set status with order_id,\n coupon_id
+activate coupon_mysql
+coupon_mysql->coupon: 返回修改结果
+deactivate coupon_mysql
+alt #pink 修改状态失败
+    coupon->pay_success_msg: consume later
+else #lightgreen 修改成功
+    coupon->OA: 上报预算
+    activate OA
+        OA-> coupon: 上报结果
+        deactivate OA
+        alt #pink 超时或失败
+            coupon->pay_success_msg: consume later
+        end
+    coupon->coupon_redis: pipeline执行\n 1.记录用户用券频次Key, 过期时间明日零点 \n 2.增加redis记录券使用量 \n 3. 增加redis记录活动总支出
+    activate coupon_redis
+    coupon_redis -> coupon: 返回活动总支出
+    deactivate coupon_redis
+    alt #lightblue 活动总支出达到阈值
+        coupon->notification: 告警
+        coupon->coupon_redis: 券批次熔断
+    end
+end
+
+coupon->coupon_redis: 释放用户维度核销优惠券分布式锁
+deactivate coupon
+
+
+@enduml

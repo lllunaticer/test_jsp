@@ -1,0 +1,55 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+participant 订单取消msg或订单服务 as order_end
+participant coupon #gold
+database 用户券详情mysql as coupon_mysql #lightgreen
+database coupon_redis #pink
+participant OA
+participant notification #lightblue
+autonumber
+
+==优惠券撤销核销流程==
+
+order_end -> coupon: 订单取消消息或订单主动退券， \n order_id\n coupon_id,\n customer_id, \n 订单详情
+alt 未使用优惠券
+    coupon -> order_end: success
+else 有使用优惠券
+    coupon -> coupon_mysql: 查询券详情 customer_id\n order_id
+    activate coupon_mysql
+        coupon_mysql->coupon: 券详情
+    deactivate coupon_mysql
+        alt #red 券不存在
+            coupon->order_end !!: 报警，Fail
+        end
+
+        alt #red 券与订单不匹配
+            coupon->order_end !!: 报警，Fail
+        end
+
+        alt #lightblue 用券时间是今日
+            coupon -> coupon_redis: 删除今日用券频控
+        end
+
+        coupon -> coupon_redis: 券批次是否有效
+        activate coupon_redis
+            coupon_redis -> coupon: 有效?
+        deactivate coupon_redis
+        alt #lightgreen 有效
+            coupon -> coupon_mysql: 修改券为未使用或已过期
+        else #pink 失效
+            coupon -> coupon_mysql: 修改券为已失效
+        end
+
+        alt #lightblue 券已冻结(不需要回退预算，因为没扣)
+            coupon -> order_end: success
+        end
+
+        alt #lightblue 券已使用(需要回退预算)
+            coupon -> coupon_redis: pipeline 回退发券量和总支出
+            coupon -> OA: 回退预算
+            coupon -> order_end: success
+        end
+    deactivate coupon_mysql
+end
+
+@enduml

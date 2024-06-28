@@ -180,6 +180,11 @@
             <artifactId>mapstruct</artifactId>
             <version>1.5.3.Final</version>
         </dependency>
+        <dependency>
+            <groupId>kuaishou</groupId>
+            <artifactId>infra-framework-loadingcache</artifactId>
+            <version>1.0.570</version>
+        </dependency>
     </dependencies>
 
     <build>

@@ -1,26 +1,18 @@
 package testMapper;
 
+import lombok.Getter;
+
 /**
  * @author Xingjian LONG
  * Created on 2021-07-20
  */
+@Getter
 public class Model {
     private String name;
     private int age;
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
+    public Model(String name, int age) {
         this.name = name;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
         this.age = age;
     }
 }

@@ -1,0 +1,63 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+participant 提单 as order
+participant coupon #gold
+database 用户券详情mysql as coupon_mysql #lightgreen
+database coupon_redis #pink
+participant 报价 as pricing
+
+==优惠券锁定==
+
+order -> coupon: 提交订单时用券\ncustomer_id\ncoupon_id\norder_id\n运费\n商品价格\n报价
+activate coupon
+coupon->coupon_redis: 获取用户维度券锁定分布式锁
+alt #pink 取锁失败
+    coupon->order: 稍后重试
+end
+
+coupon -> coupon_mysql: 查询券详情 with\n customer_id\n coupon_id
+activate coupon_mysql
+coupon_mysql -> coupon: 券详情
+deactivate coupon_mysql
+
+alt #pink 券不存在
+    coupon->order: 优惠券不存在
+else #lightgreen 券存在
+    alt #pink 券不是未使用状态
+        coupon->order: 优惠券已使用
+    end
+    alt #pink 券已过期
+        coupon->order: 优惠券已失效
+    end
+    coupon->coupon_redis: 券批次状态
+    alt #red 券批次终止使用(止损)
+        coupon->order: 优惠券不可用
+    end
+    alt 券可用
+        coupon -> coupon_redis: 用户今日是否已用券
+        activate coupon_redis
+            coupon_redis->coupon: 是/否
+        deactivate coupon_redis
+        alt #pink 今日已用券
+            coupon->order: 用户今日用券量达到上限
+        else #lightgreen 今日未用券
+            coupon -> pricing: 用券查询报价
+            activate pricing
+                pricing->coupon: 报价
+            deactivate pricing
+            alt #pink 报价与订单优惠报价不一致
+                coupon -> order: 优惠价格已变更，请重新提交
+            else #lightgreen 优惠报价一致
+                coupon -> coupon_mysql: 用户券状态改为已锁定，与订单id绑定
+                coupon -> order: 返回用券成功，券详情
+            end
+        end
+    end
+end
+coupon->coupon_redis: 释放分布式锁
+deactivate coupon
+
+
+@enduml
